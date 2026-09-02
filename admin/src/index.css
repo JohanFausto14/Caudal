@@ -1,0 +1,510 @@
+:root {
+  --color-lino: #FAFAF7;
+  --color-panel: #FFFFFF;
+  --color-niebla: #F1EFE9;
+  --color-grafito: #1C1B19;
+  --color-piedra: #79746A;
+  --color-vino: #7A2530;
+  --color-vino-suave: #F4E7E6;
+  --color-linea: #E7E3D9;
+
+  --font-serif-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --radius-container: 14px;
+  --radius-interactive: 7px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100vh;
+  background-color: var(--color-lino);
+  color: var(--color-grafito);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.45;
+}
+
+/* APP SHELL: SIDEBAR FIJO + CONTENIDO */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 224px;
+  background: var(--color-panel);
+  border-right: 1px solid var(--color-linea);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+}
+
+.main-viewport {
+  margin-left: 224px;
+  flex: 1;
+  padding: 32px 36px 64px;
+  max-width: 1160px;
+}
+
+/* SIDEBAR BRAND & NAV */
+.sidebar-brand-title {
+  font-family: var(--font-serif-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-grafito);
+  letter-spacing: -0.01em;
+}
+
+.sidebar-brand-subtitle {
+  font-size: 11.5px;
+  color: var(--color-piedra);
+  margin-top: 2px;
+}
+
+.nav-group {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nav-group-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-piedra);
+  padding: 0 10px 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-interactive);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-grafito);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.12s ease;
+}
+
+.nav-item:hover {
+  background: var(--color-niebla);
+}
+
+.nav-item.active {
+  background: var(--color-vino-suave);
+  color: var(--color-vino);
+  font-weight: 600;
+}
+
+/* BOTONES */
+.btn-primary {
+  background: var(--color-vino);
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-interactive);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: opacity 0.12s ease;
+}
+.btn-primary:hover {
+  opacity: 0.92;
+}
+
+.btn-secondary {
+  background: var(--color-panel);
+  color: var(--color-grafito);
+  border: 1px solid var(--color-linea);
+  padding: 7px 13px;
+  border-radius: var(--radius-interactive);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.12s ease;
+}
+.btn-secondary:hover {
+  background: var(--color-niebla);
+}
+
+/* MÉTRICA HERO CON GRÁFICA DE TENDENCIA */
+.hero-card {
+  background: var(--color-panel);
+  border: 1px solid var(--color-linea);
+  border-radius: var(--radius-container);
+  padding: 24px 28px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.hero-label {
+  font-size: 12.5px;
+  color: var(--color-piedra);
+  font-weight: 500;
+}
+
+.hero-value {
+  font-family: var(--font-serif-heading);
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--color-vino);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 6px 0 4px;
+}
+
+.hero-meta {
+  font-size: 12px;
+  color: var(--color-piedra);
+}
+
+/* FILA DE MÉTRICAS SECUNDARIAS COMPACTA CON DIVISORES */
+.metrics-row {
+  background: var(--color-panel);
+  border: 1px solid var(--color-linea);
+  border-radius: var(--radius-container);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: 24px;
+}
+
+.metric-cell {
+  padding: 16px 22px;
+}
+.metric-cell:not(:last-child) {
+  border-right: 1px solid var(--color-linea);
+}
+
+.metric-cell-label {
+  font-size: 12px;
+  color: var(--color-piedra);
+  font-weight: 500;
+}
+
+.metric-cell-value {
+  font-family: var(--font-serif-heading);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--color-grafito);
+  margin-top: 3px;
+  letter-spacing: -0.01em;
+}
+
+/* TABLA ELEGANTE */
+.table-container {
+  background: var(--color-panel);
+  border: 1px solid var(--color-linea);
+  border-radius: var(--radius-container);
+  overflow: hidden;
+}
+
+.table-header-block {
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--color-linea);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-title {
+  font-family: var(--font-serif-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-grafito);
+  letter-spacing: -0.01em;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.data-table th {
+  background: var(--color-niebla);
+  color: var(--color-piedra);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--color-linea);
+}
+
+.data-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--color-linea);
+  color: var(--color-grafito);
+  font-size: 13.5px;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ESTADOS: TEXTO + PUNTO DE COLOR */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.status-dot.active {
+  background-color: var(--color-vino);
+}
+.status-dot.suspended {
+  background-color: var(--color-piedra);
+}
+
+/* MENÚ KEBAB ⋯ */
+.kebab-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-kebab {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--color-piedra);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-interactive);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.12s ease;
+}
+.btn-kebab:hover {
+  background: var(--color-niebla);
+  color: var(--color-grafito);
+  border-color: var(--color-linea);
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 4px;
+  background: var(--color-panel);
+  border: 1px solid var(--color-linea);
+  border-radius: var(--radius-interactive);
+  box-shadow: 0 6px 18px rgba(28, 27, 25, 0.08);
+  width: 170px;
+  z-index: 50;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-item {
+  background: transparent;
+  border: none;
+  padding: 7px 10px;
+  font-size: 12.5px;
+  color: var(--color-grafito);
+  text-align: left;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  font-family: var(--font-sans);
+}
+.dropdown-item:hover {
+  background: var(--color-niebla);
+}
+.dropdown-item.danger {
+  color: #B91C1C;
+}
+.dropdown-item.danger:hover {
+  background: #FEE2E2;
+}
+
+/* MODAL SOBRIO */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 27, 25, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal-panel {
+  background: var(--color-panel);
+  border: 1px solid var(--color-linea);
+  border-radius: var(--radius-container);
+  max-width: 440px;
+  width: 100%;
+  padding: 26px;
+}
+
+.input-field {
+  background: var(--color-panel);
+  border: 1px solid var(--color-linea);
+  border-radius: var(--radius-interactive);
+  color: var(--color-grafito);
+  padding: 9px 12px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  width: 100%;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-vino);
+}
+/* ANIMACIONES SUPERADMIN */
+.animate-fade {
+  animation: smoothFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes smoothFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-backdrop {
+  animation: overlayFadeIn 0.16s ease-out forwards;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-panel {
+  animation: modalEnter 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.btn-primary, .btn-secondary, .nav-item {
+  transition: all 0.14s ease;
+}
+/* MODAL BACKDROP Y CENTRADO PERFECTO */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(21, 36, 32, 0.62);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+  animation: overlayFadeIn 0.16s ease-out forwards;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-panel {
+  background: var(--color-panel);
+  border: 1px solid var(--color-linea);
+  border-radius: var(--radius-container);
+  box-shadow: 0 16px 40px rgba(21, 36, 32, 0.24);
+  max-width: 440px;
+  width: 100%;
+  padding: 26px;
+  animation: modalEnter 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* NOTIFICACIÓN TOAST SUPERIOR */
+.toast-top-notification {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  background: var(--color-grafito);
+  color: #FFFFFF;
+  border: 1px solid var(--color-linea);
+  box-shadow: 0 10px 30px rgba(21, 36, 32, 0.28);
+  padding: 12px 20px;
+  border-radius: var(--radius-interactive);
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: toastSlideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

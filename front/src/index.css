@@ -1,0 +1,708 @@
+:root {
+  --bg-arena: #F7F4E9;
+  --text-tinta: #152420;
+  --text-muted: #5C6E67;
+  --text-faint: #8E9F99;
+  
+  --color-limon: #8FAE3D;
+  --color-limon-dark: #74912E;
+  --color-limon-bg: rgba(143, 174, 61, 0.14);
+  
+  --color-chile: #D14829;
+  --color-chile-dark: #B3361A;
+  --color-chile-bg: rgba(209, 72, 41, 0.12);
+  
+  --border-concha: #E8DFC2;
+  --border-concha-dark: #D4C9A7;
+  --accent-ola: #2C6E63;
+  --accent-ola-hover: #1E4E46;
+  
+  --paper-white: #FFFFFF;
+  --paper-cream: #FCFAF4;
+  
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-arena);
+  color: var(--text-tinta);
+  font-family: var(--font-sans);
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+.app-layout {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 1040px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+}
+
+/* NAVBAR SYSTEM */
+.navbar-header {
+  background: var(--bg-arena);
+  border-bottom: 1px solid var(--border-concha);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.navbar-container {
+  max-width: 1040px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.brand-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.brand-main-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-tinta);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.brand-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+.nav-tabs-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.nav-tab-item {
+  background: none;
+  border: none;
+  padding: 8px 2px;
+  font-size: 0.92rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 2.5px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.nav-tab-item:hover {
+  color: var(--text-tinta);
+}
+.nav-tab-item.active {
+  font-weight: 700;
+  color: var(--text-tinta);
+  border-bottom-color: var(--accent-ola);
+}
+
+.nav-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.status-beacon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgba(21, 36, 32, 0.04);
+  border: 1px solid rgba(232, 223, 194, 0.8);
+  transition: all 0.15s ease;
+}
+.status-beacon-btn:hover {
+  background: rgba(21, 36, 32, 0.08);
+}
+
+.status-beacon-light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+.status-beacon-light.online {
+  background-color: #8FAE3D;
+  box-shadow: 0 0 8px rgba(143, 174, 61, 0.9);
+}
+.status-beacon-light.offline {
+  background-color: #D14829;
+  box-shadow: 0 0 8px rgba(209, 72, 41, 0.9);
+}
+.status-beacon-light.syncing {
+  background-color: #F59E0B;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.9);
+  animation: beaconPulse 0.9s infinite alternate ease-in-out;
+}
+
+@keyframes beaconPulse {
+  from { transform: scale(0.85); opacity: 0.7; }
+  to { transform: scale(1.2); opacity: 1; }
+}
+
+/* BUTTONS BASE CLASS & MODIFIERS */
+.btn-ola, .btn-limon, .btn-chile, .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  transition: all 0.15s ease;
+  border: none;
+}
+
+.btn-ola {
+  background: var(--accent-ola);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 9px 16px;
+}
+.btn-ola:hover {
+  background: var(--accent-ola-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-tinta);
+  border: 1px solid var(--border-concha-dark);
+  font-weight: 600;
+  font-size: 0.84rem;
+  padding: 6px 12px;
+}
+.btn-outline:hover {
+  background: var(--paper-white);
+  border-color: var(--text-tinta);
+}
+
+.btn-limon {
+  background: var(--color-limon);
+  color: var(--text-tinta);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 12px 22px;
+}
+.btn-limon:hover {
+  background: var(--color-limon-dark);
+  color: #FFFFFF;
+}
+
+.btn-chile {
+  background: var(--color-chile);
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 0.84rem;
+  padding: 7px 14px;
+}
+.btn-chile:hover {
+  background: var(--color-chile-dark);
+}
+
+/* FORMS */
+.form-group {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-tinta);
+}
+.form-input, .form-select, .form-textarea {
+  background: var(--paper-white);
+  border: 1px solid var(--border-concha-dark);
+  border-radius: 6px;
+  padding: 9px 11px;
+  color: var(--text-tinta);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--accent-ola);
+  box-shadow: 0 0 0 3px rgba(44, 110, 99, 0.15);
+}
+
+/* BOLETA CARD STYLING */
+.boleta-card {
+  background: var(--paper-white);
+  border: 1px solid var(--border-concha);
+  border-top: 3px dashed var(--border-concha-dark);
+  border-radius: 2px;
+  box-shadow: 0 4px 18px rgba(21, 36, 32, 0.04);
+  width: 100%;
+}
+.boleta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--border-concha);
+}
+.boleta-divider-solid {
+  border-top: 2px solid var(--text-tinta);
+  margin: 18px 0;
+}
+
+/* MODALS */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(21, 36, 32, 0.55);
+  backdrop-filter: blur(3px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+.modal-content {
+  background: var(--bg-arena);
+  border: 1px solid var(--border-concha);
+  border-top: 3px dashed var(--border-concha-dark);
+  border-radius: 4px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+  box-shadow: 0 16px 40px rgba(21, 36, 32, 0.2);
+}
+
+/* CALENDARIO HISTÓRICO MODULE - MÁS COMPACTO Y ELEGANTE */
+.calendario-modulo-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+.calendario-card-main {
+  width: 100%;
+}
+.calendario-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.calendario-titulo-grupo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.calendario-mes-titulo {
+  font-family: var(--font-serif);
+  color: var(--text-tinta);
+  font-weight: 700;
+  margin: 0;
+}
+.calendario-nav-botones {
+  display: flex;
+  gap: 6px;
+}
+.calendario-dias-semana-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  width: 100%;
+}
+.calendario-dias-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+}
+.calendario-celda-dia {
+  background: var(--paper-cream);
+  color: var(--text-tinta);
+  border: 1px solid var(--border-concha);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.12s ease;
+  overflow: hidden;
+}
+.calendario-celda-dia.with-activity {
+  background: var(--paper-white);
+}
+.calendario-celda-dia.today {
+  border: 2px solid var(--color-limon);
+}
+.calendario-celda-dia.selected {
+  background: var(--text-tinta) !important;
+  color: var(--bg-arena) !important;
+  border: 2px solid var(--accent-ola) !important;
+}
+.calendario-celda-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.calendario-badge-hoy {
+  font-size: 0.58rem;
+  background: var(--accent-ola);
+  color: #FFFFFF;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-weight: 700;
+  line-height: 1;
+}
+.calendario-celda-dia.selected .calendario-badge-hoy {
+  background: var(--color-limon);
+  color: var(--text-tinta);
+}
+.calendario-celda-totales {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.calendario-celda-dia.selected .calendario-monto-ventas {
+  color: #A8CD4D !important;
+}
+.calendario-celda-dia.selected .calendario-monto-gastos {
+  color: #FF8A65 !important;
+}
+
+/* UTILITIES */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.animate-fade {
+  animation: fadeIn 0.2s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESPONSIVE BREAKPOINT: DESKTOP (min-width: 769px) - COMPACTO */
+@media (min-width: 769px) {
+  .navbar-header {
+    padding: 14px 24px;
+  }
+  .navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .nav-tabs-wrapper {
+    gap: 22px;
+  }
+  .btn-text-desktop {
+    display: inline;
+  }
+  .btn-text-mobile {
+    display: none;
+  }
+  .calendario-card-main {
+    padding: 20px 20px;
+  }
+  .calendario-mes-titulo {
+    font-size: 1.35rem;
+  }
+  .calendario-dias-semana-grid {
+    gap: 6px;
+    font-size: 0.76rem;
+    margin-bottom: 8px;
+  }
+  .calendario-dias-grid {
+    gap: 6px;
+  }
+  .calendario-celda-vacia {
+    min-height: 68px;
+    background: #FAF7EE;
+    border-radius: 4px;
+    opacity: 0.35;
+  }
+  .calendario-celda-dia {
+    min-height: 68px;
+    padding: 6px 8px;
+    border-radius: 4px;
+  }
+  .calendario-numero-dia {
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .calendario-monto-ventas {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--color-limon-dark);
+  }
+  .calendario-monto-gastos {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-chile);
+  }
+}
+
+/* RESPONSIVE BREAKPOINT: MOBILE & TABLET (max-width: 768px) */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 12px 10px 56px;
+  }
+  .navbar-header {
+    padding: 10px 12px 6px;
+  }
+  .navbar-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 8px 10px;
+    align-items: center;
+  }
+  .brand-container {
+    grid-column: 1;
+    grid-row: 1;
+    gap: 10px;
+    min-width: 0;
+  }
+  .brand-main-title {
+    font-size: 1.15rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brand-subtitle {
+    font-size: 0.65rem;
+  }
+  .nav-actions-group {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 8px;
+  }
+  .btn-gasto-header {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
+  .btn-text-desktop {
+    display: none;
+  }
+  .btn-text-mobile {
+    display: inline;
+  }
+  .nav-tabs-wrapper {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    overflow-x: auto;
+    width: 100%;
+    gap: 16px;
+    border-top: 1px solid rgba(232, 223, 194, 0.7);
+    padding-top: 6px;
+    padding-bottom: 2px;
+  }
+  .nav-tab-item {
+    font-size: 0.86rem;
+    padding: 4px 2px;
+    flex-shrink: 0;
+  }
+  .boleta-card {
+    padding: 16px 12px !important;
+  }
+  .calendario-card-main {
+    padding: 12px 6px !important;
+  }
+  .calendario-mes-titulo {
+    font-size: 1.15rem;
+  }
+  .calendario-dias-semana-grid {
+    gap: 3px;
+    font-size: 0.66rem;
+    margin-bottom: 4px;
+  }
+  .calendario-dias-grid {
+    gap: 3px;
+  }
+  .calendario-celda-vacia {
+    min-height: 42px;
+    background: #FAF7EE;
+    border-radius: 3px;
+    opacity: 0.35;
+  }
+  .calendario-celda-dia {
+    min-height: 42px;
+    padding: 2px 2px;
+    border-radius: 3px;
+  }
+  .calendario-numero-dia {
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .calendario-monto-ventas {
+    font-size: 0.58rem;
+    font-weight: 700;
+    color: var(--color-limon-dark);
+    line-height: 1.1;
+  }
+  .calendario-monto-gastos {
+    font-size: 0.56rem;
+    font-weight: 600;
+    color: var(--color-chile);
+    line-height: 1.1;
+  }
+}
+
+/* PRINT MEDIA STYLES - Hoja Membretada Oficial */
+@media print {
+  body, html {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+  header, 
+  .navbar-header, 
+  .no-print, 
+  button, 
+  input, 
+  .modal-overlay,
+  nav {
+    display: none !important;
+  }
+  .main-content {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .boleta-imprimible {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: #FFFFFF !important;
+    page-break-inside: avoid;
+  }
+  .boleta-card {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  @page {
+    margin: 1.5cm;
+    size: auto;
+  }
+}
+/* ANIMACIONES SUAVES Y TRANSICIONES PROFESIONALES */
+.animate-fade {
+  animation: smoothFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes smoothFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-overlay,
+.modal-backdrop {
+  animation: overlayFadeIn 0.16s ease-out forwards;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  animation: modalEnter 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Transiciones en Tarjetas, Botones y Pestañas */
+.boleta-card {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-limon,
+.btn-chile,
+.btn-outline,
+.btn-secondary,
+.btn-primary {
+  transition: all 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-limon:active,
+.btn-chile:active,
+.btn-outline:active,
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.nav-tab-item {
+  transition: all 0.14s ease;
+}

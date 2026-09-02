@@ -1,0 +1,17 @@
+{
+  "name": "finanzas",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix back\" \"npm run dev --prefix front\" \"npm run dev --prefix admin\"",
+    "dev:all": "concurrently \"npm run dev --prefix back\" \"npm run dev --prefix front\" \"npm run dev --prefix admin\"",
+    "dev:front": "npm run dev --prefix front",
+    "dev:back": "npm run dev --prefix back",
+    "dev:admin": "npm run dev --prefix admin",
+    "build:all": "npm run build --prefix back && npm run build --prefix front && npm run build --prefix admin",
+    "install:all": "npm install && npm install --prefix front && npm install --prefix back && npm install --prefix admin"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

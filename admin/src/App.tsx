@@ -5,6 +5,7 @@ import { ModalEditar } from './components/ModalEditar';
 import { ModalResetPin } from './components/ModalResetPin';
 import { ModalConfirmacion } from './components/ModalConfirmacion';
 import { VistaAjustes } from './components/VistaAjustes';
+import { LogoCaudal } from './components/LogoCaudal';
 
 export function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => adminApi.isAuthenticated());
@@ -187,23 +188,11 @@ export function App() {
         padding: 20,
       }}>
         <div className="modal-panel animate-fade" style={{ width: '100%', maxWidth: 360, padding: 32, textAlign: 'center' }}>
-          <div style={{
-            width: 44,
-            height: 44,
-            borderRadius: '50%',
-            backgroundColor: 'var(--color-vino-suave)',
-            color: 'var(--color-vino)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 16px',
-            fontSize: 20,
-            fontWeight: 800,
-          }}>
-            C
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
+            <LogoCaudal tamano={52} />
           </div>
 
-          <h1 style={{ fontFamily: 'var(--font-serif-heading)', fontSize: 20, fontWeight: 700, color: 'var(--color-grafito)', margin: 0 }}>
+          <h1 style={{ fontFamily: 'var(--font-serif-heading)', fontSize: 22, fontWeight: 700, color: 'var(--color-grafito)', margin: 0 }}>
             Caudal
           </h1>
           <p style={{ fontSize: 12, color: 'var(--color-piedra)', marginTop: 4, marginBottom: 24 }}>
@@ -266,12 +255,15 @@ export function App() {
 
   return (
     <div className="app-shell animate-fade">
-      {/* SIDEBAR */}
+      {/* SIDEBAR CON ISOTIPO OFICIAL DE CAUDAL */}
       <aside className="sidebar">
         <div>
-          <div style={{ padding: '0 10px' }}>
-            <div className="sidebar-brand-title">Caudal</div>
-            <div className="sidebar-brand-subtitle">Plataforma administrativa</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 8px' }}>
+            <LogoCaudal tamano={32} />
+            <div>
+              <div className="sidebar-brand-title">Caudal</div>
+              <div className="sidebar-brand-subtitle">Plataforma administrativa</div>
+            </div>
           </div>
 
           <div className="nav-group">
@@ -297,7 +289,7 @@ export function App() {
           type="button"
           className="nav-item"
           onClick={() => setIsLogoutModalOpen(true)}
-          style={{ color: 'var(--color-alerta)' }}
+          style={{ color: '#B91C1C' }}
         >
           Cerrar sesión
         </button>
@@ -362,7 +354,7 @@ export function App() {
               </div>
               <div className="metric-cell">
                 <div className="metric-cell-label">En línea ahora</div>
-                <div className="metric-cell-value" style={{ color: '#8FAE3D' }}>
+                <div className="metric-cell-value" style={{ color: 'var(--color-vino)' }}>
                   {enLineaCount}
                 </div>
               </div>
@@ -458,7 +450,7 @@ export function App() {
                           <td>
                             <div className="status-indicator">
                               <span className={`status-dot ${neg.isActive ? 'active' : 'suspended'}`} />
-                              <span style={{ color: neg.isActive ? 'var(--color-grafito)' : 'var(--color-alerta)' }}>
+                              <span style={{ color: neg.isActive ? 'var(--color-grafito)' : 'var(--color-piedra)' }}>
                                 {neg.isActive ? 'Activo' : 'Suspendido'}
                               </span>
                             </div>
@@ -466,7 +458,7 @@ export function App() {
                           <td>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                               {actividad.enLinea && <span className="status-dot active" />}
-                              <span style={{ fontSize: 12, color: actividad.enLinea ? '#2C6E63' : 'var(--color-piedra)', fontWeight: actividad.enLinea ? 600 : 400 }}>
+                              <span style={{ fontSize: 12, color: actividad.enLinea ? 'var(--color-vino)' : 'var(--color-piedra)', fontWeight: actividad.enLinea ? 600 : 400 }}>
                                 {actividad.texto}
                               </span>
                             </div>

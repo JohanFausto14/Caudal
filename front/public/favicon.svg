@@ -1,24 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
-  <rect width="100" height="100" rx="22" fill="#FAF7EE" />
   <path
-    d="M24 16C24 13.8 25.8 12 28 12H72C74.2 12 76 13.8 76 16V82L67 75L58 82L50 75L42 82L33 75L24 82V16Z"
-    fill="#FFFFFF"
+    d="M24 16C24 12 27 10 31 10H69C73 10 76 12 76 16V80L68 73L60 80L50 73L40 80L32 73L24 80V16Z"
+    fill="#FAF7EE"
     stroke="#2C6E63"
-    strokeWidth="6"
+    strokeWidth="7"
     strokeLinejoin="round"
   />
   <path
     d="M24 24H76"
-    stroke="#E8DFC2"
+    stroke="#D4C9A7"
     strokeWidth="4"
     strokeLinecap="round"
-    strokeDasharray="4 4"
   />
-  <circle cx="50" cy="48" r="15" fill="#8FAE3D" />
+  <circle cx="50" cy="46" r="14" fill="#8FAE3D" />
   <path
-    d="M43 48L48 53L57 43"
+    d="M43 46L48 51L57 41"
     stroke="#FFFFFF"
-    strokeWidth="4"
+    strokeWidth="4.5"
     strokeLinecap="round"
     strokeLinejoin="round"
   />

@@ -6,27 +6,40 @@ interface PropiedadesLogoCaudal {
 }
 
 export const LogoCaudal: React.FC<PropiedadesLogoCaudal> = ({
-  tamano = 32,
+  tamano = 36,
   mostrarTexto = false,
 }) => {
   return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
       <svg
         width={tamano}
         height={tamano}
-        viewBox="0 0 100 100"
+        viewBox="0 0 120 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ flexShrink: 0 }}
+        style={{ flexShrink: 0, display: 'block' }}
       >
-        {/* Isotipo Caudal: Monograma C con corte de flujo a 45° */}
-        <path
-          d="M68 28C62 20 53 16 43 16C23 16 12 31 12 50C12 69 23 84 43 84C53 84 62 80 68 72L57 61C53 66 48 68 43 68C32 68 26 59 26 50C26 41 32 32 43 32C48 32 53 34 57 39L68 28Z"
-          fill="#7A2530"
-        />
-        {/* Corte diagonal de flujo ascendente (Slash) */}
+        <defs>
+          <mask id="caudal-slash-mask">
+            {/* Fondo blanco completo para revelar todo */}
+            <rect width="120" height="120" fill="#FFFFFF" />
+            {/* Franja de corte diagonal negativa a 45 grados */}
+            <polygon points="12,108 24,108 108,24 96,24" fill="#000000" />
+          </mask>
+        </defs>
+
+        {/* Monograma C sólido y arquitectónico con corte de máscara */}
+        <g mask="url(#caudal-slash-mask)">
+          <path
+            d="M84,30 C76,17 61,10 44,10 C19.7,10 0,29.7 0,54 C0,78.3 19.7,98 44,98 C61,98 76,91 84,78 L65,65 C60,72 53,76 44,76 C31.8,76 22,66.2 22,54 C22,41.8 31.8,32 44,32 C53,32 60,36 65,43 L84,30 Z"
+            fill="#7A2530"
+            transform="translate(16, 6)"
+          />
+        </g>
+
+        {/* Barra diagonal afilada de flujo ascendente (Lanza / Slash a 45 grados) */}
         <polygon
-          points="88,14 36,86 28,86 80,14"
+          points="20,100 28,100 100,28 100,20 92,20 20,92"
           fill="#7A2530"
         />
       </svg>

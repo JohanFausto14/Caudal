@@ -189,7 +189,7 @@ export function App() {
       }}>
         <div className="modal-panel animate-fade" style={{ width: '100%', maxWidth: 360, padding: 32, textAlign: 'center' }}>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
-            <LogoCaudal tamano={52} />
+            <LogoCaudal tamano={48} />
           </div>
 
           <h1 style={{ fontFamily: 'var(--font-serif-heading)', fontSize: 22, fontWeight: 700, color: 'var(--color-grafito)', margin: 0 }}>
@@ -257,42 +257,41 @@ export function App() {
     <div className="app-shell animate-fade">
       {/* SIDEBAR CON ISOTIPO OFICIAL DE CAUDAL */}
       <aside className="sidebar">
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <LogoCaudal tamano={32} />
             <div>
               <div className="sidebar-brand-title">Caudal</div>
               <div className="sidebar-brand-subtitle">Plataforma administrativa</div>
             </div>
           </div>
-
-          <div className="nav-group">
-            <div className="nav-group-label">Navegación</div>
-            <button
-              type="button"
-              className={`nav-item ${currentView === 'directorio' ? 'active' : ''}`}
-              onClick={() => setCurrentView('directorio')}
-            >
-              Negocios cliente
-            </button>
-            <button
-              type="button"
-              className={`nav-item ${currentView === 'ajustes' ? 'active' : ''}`}
-              onClick={() => setCurrentView('ajustes')}
-            >
-              Ajustes de acceso
-            </button>
-          </div>
         </div>
 
-        <button
-          type="button"
-          className="nav-item"
-          onClick={() => setIsLogoutModalOpen(true)}
-          style={{ color: '#B91C1C' }}
-        >
-          Cerrar sesión
-        </button>
+        <div className="nav-group">
+          <div className="nav-group-label">Navegación</div>
+          <button
+            type="button"
+            className={`nav-item ${currentView === 'directorio' ? 'active' : ''}`}
+            onClick={() => setCurrentView('directorio')}
+          >
+            Negocios cliente
+          </button>
+          <button
+            type="button"
+            className={`nav-item ${currentView === 'ajustes' ? 'active' : ''}`}
+            onClick={() => setCurrentView('ajustes')}
+          >
+            Ajustes de acceso
+          </button>
+          <button
+            type="button"
+            className="nav-item"
+            onClick={() => setIsLogoutModalOpen(true)}
+            style={{ color: '#B91C1C' }}
+          >
+            Cerrar sesión
+          </button>
+        </div>
       </aside>
 
       {/* CONTENIDO PRINCIPAL */}
@@ -301,8 +300,8 @@ export function App() {
           <VistaAjustes onSuccess={(msg) => mostrarToast(msg)} />
         ) : (
           <>
-            {/* CABECERA */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
+            {/* CABECERA RESPONSIVA */}
+            <div className="header-actions-mobile" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 20 }}>
               <div>
                 <h1 style={{ fontFamily: 'var(--font-serif-heading)', fontSize: 22, fontWeight: 700, color: 'var(--color-grafito)', margin: 0 }}>
                   Negocios cliente
@@ -312,7 +311,7 @@ export function App() {
                 </p>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
                 <div
                   style={{
                     display: 'flex',
@@ -370,7 +369,7 @@ export function App() {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+                <div className="table-filters-mobile" style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                   <input
                     type="text"
                     className="input-field"
@@ -402,109 +401,111 @@ export function App() {
                   No se encontraron negocios con los filtros aplicados.
                 </div>
               ) : (
-                <table className="data-table">
-                  <thead>
-                    <tr>
-                      <th>Negocio y contacto</th>
-                      <th>Código slug (URL)</th>
-                      <th>Estado de servicio</th>
-                      <th>Última actividad</th>
-                      <th style={{ textAlign: 'center', width: 60 }}></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {negociosFiltrados.map((neg) => {
-                      const isOpenKebab = openKebabCodigo === neg.codigo;
-                      const actividad = formatearEstadoActividad(neg);
-                      const urlPuntoVenta = obtenerUrlPuntoVenta(neg.codigo);
+                <div className="table-scroll-wrapper">
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        <th>Negocio y contacto</th>
+                        <th>Código slug (URL)</th>
+                        <th>Estado de servicio</th>
+                        <th>Última actividad</th>
+                        <th style={{ textAlign: 'center', width: 60 }}></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {negociosFiltrados.map((neg) => {
+                        const isOpenKebab = openKebabCodigo === neg.codigo;
+                        const actividad = formatearEstadoActividad(neg);
+                        const urlPuntoVenta = obtenerUrlPuntoVenta(neg.codigo);
 
-                      return (
-                        <tr key={neg.id || neg.codigo}>
-                          <td>
-                            <div style={{ fontWeight: 600, color: 'var(--color-grafito)' }}>
-                              {neg.nombre}
-                            </div>
-                            <div style={{ fontSize: 11.5, color: 'var(--color-piedra)', marginTop: 2 }}>
-                              Tel: {neg.telefono || 'Sin teléfono'}
-                            </div>
-                          </td>
-                          <td>
-                            <span
-                              onClick={() => copiarEnlace(neg.codigo)}
-                              style={{
-                                fontFamily: 'monospace',
-                                backgroundColor: 'var(--color-niebla)',
-                                border: '1px solid var(--color-linea)',
-                                padding: '3px 8px',
-                                borderRadius: 'var(--radius-interactive)',
-                                fontSize: 12,
-                                color: 'var(--color-vino)',
-                                cursor: 'pointer',
-                                fontWeight: 600,
-                              }}
-                              title={`Clic para copiar enlace: ${urlPuntoVenta}`}
-                            >
-                              {neg.codigo}
-                            </span>
-                          </td>
-                          <td>
-                            <div className="status-indicator">
-                              <span className={`status-dot ${neg.isActive ? 'active' : 'suspended'}`} />
-                              <span style={{ color: neg.isActive ? 'var(--color-grafito)' : 'var(--color-piedra)' }}>
-                                {neg.isActive ? 'Activo' : 'Suspendido'}
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                              {actividad.enLinea && <span className="status-dot active" />}
-                              <span style={{ fontSize: 12, color: actividad.enLinea ? 'var(--color-vino)' : 'var(--color-piedra)', fontWeight: actividad.enLinea ? 600 : 400 }}>
-                                {actividad.texto}
-                              </span>
-                            </div>
-                          </td>
-                          <td style={{ textAlign: 'center' }}>
-                            <div className="kebab-wrapper" ref={isOpenKebab ? menuRef : undefined}>
-                              <button
-                                type="button"
-                                className="btn-kebab"
-                                onClick={() => setOpenKebabCodigo(isOpenKebab ? null : neg.codigo)}
-                                title="Opciones del negocio"
+                        return (
+                          <tr key={neg.id || neg.codigo}>
+                            <td>
+                              <div style={{ fontWeight: 600, color: 'var(--color-grafito)' }}>
+                                {neg.nombre}
+                              </div>
+                              <div style={{ fontSize: 11.5, color: 'var(--color-piedra)', marginTop: 2 }}>
+                                Tel: {neg.telefono || 'Sin teléfono'}
+                              </div>
+                            </td>
+                            <td>
+                              <span
+                                onClick={() => copiarEnlace(neg.codigo)}
+                                style={{
+                                  fontFamily: 'monospace',
+                                  backgroundColor: 'var(--color-niebla)',
+                                  border: '1px solid var(--color-linea)',
+                                  padding: '3px 8px',
+                                  borderRadius: 'var(--radius-interactive)',
+                                  fontSize: 12,
+                                  color: 'var(--color-vino)',
+                                  cursor: 'pointer',
+                                  fontWeight: 600,
+                                }}
+                                title={`Clic para copiar enlace: ${urlPuntoVenta}`}
                               >
-                                ⋯
-                              </button>
+                                {neg.codigo}
+                              </span>
+                            </td>
+                            <td>
+                              <div className="status-indicator">
+                                <span className={`status-dot ${neg.isActive ? 'active' : 'suspended'}`} />
+                                <span style={{ color: neg.isActive ? 'var(--color-grafito)' : 'var(--color-piedra)' }}>
+                                  {neg.isActive ? 'Activo' : 'Suspendido'}
+                                </span>
+                              </div>
+                            </td>
+                            <td>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                                {actividad.enLinea && <span className="status-dot active" />}
+                                <span style={{ fontSize: 12, color: actividad.enLinea ? 'var(--color-vino)' : 'var(--color-piedra)', fontWeight: actividad.enLinea ? 600 : 400 }}>
+                                  {actividad.texto}
+                                </span>
+                              </div>
+                            </td>
+                            <td style={{ textAlign: 'center' }}>
+                              <div className="kebab-wrapper" ref={isOpenKebab ? menuRef : undefined}>
+                                <button
+                                  type="button"
+                                  className="btn-kebab"
+                                  onClick={() => setOpenKebabCodigo(isOpenKebab ? null : neg.codigo)}
+                                  title="Opciones del negocio"
+                                >
+                                  ⋯
+                                </button>
 
-                              {isOpenKebab && (
-                                <div className="dropdown-menu">
-                                  <button type="button" className="dropdown-item" onClick={() => copiarEnlace(neg.codigo)}>
-                                    Copiar enlace
-                                  </button>
-                                  <button type="button" className="dropdown-item" onClick={() => abrirCajaEnNuevaPestana(neg.codigo)}>
-                                    Abrir punto de venta
-                                  </button>
-                                  <button type="button" className="dropdown-item" onClick={() => { setEditNegocio(neg); setOpenKebabCodigo(null); }}>
-                                    Editar contacto
-                                  </button>
-                                  <button type="button" className="dropdown-item" onClick={() => { setResetPinNegocio(neg); setOpenKebabCodigo(null); }}>
-                                    Resetear PIN
-                                  </button>
-                                  <button type="button" className="dropdown-item" onClick={() => handleToggleEstado(neg)}>
-                                    {neg.isActive ? 'Suspender negocio' : 'Activar negocio'}
-                                  </button>
-                                  {neg.codigo !== 'elharocho' && (
-                                    <button type="button" className="dropdown-item danger" onClick={() => { setNegocioAEliminar(neg); setOpenKebabCodigo(null); }}>
-                                      Eliminar negocio
+                                {isOpenKebab && (
+                                  <div className="dropdown-menu">
+                                    <button type="button" className="dropdown-item" onClick={() => copiarEnlace(neg.codigo)}>
+                                      Copiar enlace
                                     </button>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                                    <button type="button" className="dropdown-item" onClick={() => abrirCajaEnNuevaPestana(neg.codigo)}>
+                                      Abrir punto de venta
+                                    </button>
+                                    <button type="button" className="dropdown-item" onClick={() => { setEditNegocio(neg); setOpenKebabCodigo(null); }}>
+                                      Editar contacto
+                                    </button>
+                                    <button type="button" className="dropdown-item" onClick={() => { setResetPinNegocio(neg); setOpenKebabCodigo(null); }}>
+                                      Resetear PIN
+                                    </button>
+                                    <button type="button" className="dropdown-item" onClick={() => handleToggleEstado(neg)}>
+                                      {neg.isActive ? 'Suspender negocio' : 'Activar negocio'}
+                                    </button>
+                                    {neg.codigo !== 'elharocho' && (
+                                      <button type="button" className="dropdown-item danger" onClick={() => { setNegocioAEliminar(neg); setOpenKebabCodigo(null); }}>
+                                        Eliminar negocio
+                                      </button>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               )}
             </div>
           </>
